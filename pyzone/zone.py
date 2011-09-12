@@ -84,7 +84,7 @@ def get_state(zid):
     '''
     Returns the state a zone is in.
 
-    @param zone: Id of the zone.
+    zone -- Id of the zone.
     '''
     void_pointer = c_void_p()
     # attribute nr 3 is the state of the zone...
@@ -96,7 +96,7 @@ def boot_zone(zid):
     '''
     Boot a zone.
 
-    @param zid: Id of the zone.
+    zid -- Id of the zone.
     '''
     if zid == 0:
         raise AttributeError('Cannot handle global zone...')
@@ -115,8 +115,8 @@ def halt_zone(zid, ready=True):
     '''
     Will halt the zone and put it in ready state (default).
 
-    @param zid: Id of the zone.
-    @param ready: Indicates if the zone should be set to ready state or not.
+    zid -- Id of the zone.
+    ready -- Indicates if the zone should be set to ready state or not.
     '''
     if zid == 0:
         raise AttributeError('Cannot handle global zone...')
@@ -137,7 +137,7 @@ def shutdown_zone(zid):
     '''
     Will shutdown the zone an put it in down state.
 
-    @param zid: Id of the zone.
+    zid -- Id of the zone.
     '''
     # taken from zone.h
     if not LIBRARY.zone_shutdown(c_int(zid)) == 0:
@@ -148,7 +148,7 @@ def restart_zone(zid):
     '''
     Restart a zone
 
-    @param zid: Id of the zone.
+    zid -- Id of the zone.
     '''
     if zid == 0:
         raise AttributeError('Cannot handle global zone...')
@@ -167,7 +167,7 @@ def ready_zone(zid):
     '''
     Brings a zone into ready state.
 
-    @param zid: Id of the zone.
+    zid -- Id of the zone.
     '''
     if zid == 0:
         raise AttributeError('Cannot handle global zone...')
@@ -184,8 +184,8 @@ def call_zone_adm(zonename, cmd):
     '''
     Call COMMANDS on zoneadmd...
 
-    @param zonename: Name of the zone.
-    @param cmd: Name of the cmd.
+    zonename -- Name of the zone.
+    cmd -- Name of the cmd.
     '''
     if cmd not in COMMANDS.values() and cmd not in COMMANDS.keys():
         raise AttributeError('Unknown command...')
